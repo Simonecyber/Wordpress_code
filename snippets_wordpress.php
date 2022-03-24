@@ -25,3 +25,36 @@ if($lastBlog->have_posts())://se la $var ha dei posto
     endif;
     wp_reset_postdata( );
     ?>
+
+
+
+<!--
+=============================
+How to use custom_post_type
+=============================
+-->
+
+<?php
+/*
+Questo codice va inserito nel functions.php
+*/
+
+function nome_custom_post_type(){
+
+    $labels = array(
+        'name' => 'nome del cpt',//non del custom post type viene visualizzato tip pagine/articoli
+        'singular_name' => 'nome al singolare'//tenere uguale al plurale è più comodo
+        ''
+    );
+    $args
+
+
+
+
+
+
+}
+
+
+?>
+
