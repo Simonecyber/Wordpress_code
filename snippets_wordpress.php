@@ -44,9 +44,9 @@ function nome_custom_post_type(){
         'name' => 'nome del cpt',//non del custom post type viene visualizzato tip pagine/articoli
         'singular_name' => 'nome al singolare,'//tenere uguale al plurale è più comodo
         'add_new'=>'Add Portfolio Item',//label for the button
-        'all_items' => 'All Items',
-		'add_new_item' => 'Add Item',
-		'edit_item' => 'Edit Item',
+        'all_items' => 'All Items',//amministrazion pannel label 
+		'add_new_item' => 'Add Item', //button label
+		'edit_item' => 'Edit Item',//modifca elmento
 		'new_item' => 'New Item',
 		'view_item' => 'View Item',
 		'search_item' => 'Search Portfolio',
@@ -61,9 +61,9 @@ function nome_custom_post_type(){
 		'publicly_queryable' => true,
 		'query_var' => true,
 		'rewrite' => true,
-		'capability_type' => 'post',
+		'capability_type' => 'post', //impostazione prendiamo tra quelle predefinite come post o page
 		'hierarchical' => false,
-		'supports' => array(
+		'supports' => array(//cosa vogliamo nei vari elementi che creiamo
 			'title',
 			'editor',
 			'excerpt',
@@ -83,6 +83,52 @@ function nome_custom_post_type(){
 
 }
 add_action('init','nome_custom_post_type' )
+/**
+ * Per aggiungere la pagina singola per 'portfolio' e la pagina archive basta duplicare i due file e aggiungere -portfolio
+ * Wordpress li riconoscera in automatico
+ */
 
 
 ?>
+
+<!--
+================================================
+Custom menu [In header o dove si vuole il menu]
+================================================
+-->
+
+<?php
+/**
+ * Dopo aver registrato il menu con apposita funzione in function.php
+ */
+$locationDetails=get_nav_menu_locations(); //salva nella variabile tutti i menu registrati, attraverso la stampa posso vedere i nomi
+$menuID = $locationDetails['nome menu'];//salvo nella variabile il menu scelto
+$nomemenuMenuItems=wp_get_nav_menu_items( $menuID);//passado l'id del menu interessato recupero gli elementi
+
+//prima dell'HTML di ogni elemento menu ciclo gli elementi
+foreach($nomemenuMenuItems as $nomemenuMenuItem){
+    /**
+     * codice html con i vari riferimenti per gli elementi
+     */
+}
+
+?>
+
+
+<!--
+==================================
+Regitrare menu [in function.php]
+==================================
+-->
+<?php
+function nome_funzione_menu_theme_setup() {
+	
+	add_theme_support('menus');//aggiunta supporto per il menu a wordpress vedi https://developer.wordpress.org/reference/functions/add_theme_support/
+	
+	register_nav_menu('nome', 'dove'); //per registrare ogni menu
+}
+
+add_action('init', 'nome_funzione_menu_theme_setup');
+
+?>
+
