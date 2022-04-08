@@ -132,3 +132,63 @@ add_action('init', 'nome_funzione_menu_theme_setup');
 
 ?>
 
+
+<!--
+==================================
+Custom Taxonomy
+==================================
+Rappresentano le categorie e i tag
+Hierarchical taxonomy -> category with parent and child
+No hierarchical -> tags haven't a parent or child
+-->
+
+<?php
+
+function nome_custom_taxonomies() {
+
+	//add new taxonomy hierarchical
+	//se utilizzi type interferisce con il codice standard di wordpress
+
+	$labels = array(
+		'name' => 'Fields',
+		'singular_name' => 'Field',
+		'search_items' => 'Search Fields',
+		'all_items' => 'All Fields',
+		'parent_item' => 'Parent Field',
+		'parent_item_colon' => 'Parent Field:',
+		'edit_item' => 'Edit Field',
+		'update_item' => 'Update Field',
+		'add_new_item' => 'Add New Work Field',
+		'new_item_name' => 'New Field Name',
+		'menu_name' => 'Fields'
+	);
+	
+	$args = array(
+		'hierarchical' => true,
+		'labels' => $labels,
+		'show_ui' => true,
+		'show_admin_column' => true,
+		'query_var' => true,
+		'rewrite' => array( 'slug' => 'field' )
+	);
+	
+	register_taxonomy('field', array('portfolio'), $args);
+	
+	//add new taxonomy NOT hierarchical
+
+	register_taxonomy('software', 'portfolio', array(
+		'label' => 'nome_etichetta',
+		'rewrite' => array('slug' =>'nome_slug' ),
+		'hierarchical'=>false
+
+	));
+
+
+}
+add_action( 'init' , 'nome_custom_taxonomies' );
+
+//Per stampare il custom --> wp_get_post_terms();
+
+?>
+
+
